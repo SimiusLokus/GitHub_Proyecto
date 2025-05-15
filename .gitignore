@@ -1,0 +1,14 @@
+# Archivos de Python
+*.pyc
+__pycache__/
+
+# DB y entorno
+db.sqlite3
+.env
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+PGH/
+
