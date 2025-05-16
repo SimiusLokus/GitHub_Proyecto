@@ -1,7 +1,7 @@
 @echo off
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-:: === CONFIGURACIÓN GENERAL ===
+:: === CONFIGURACIÃ“N GENERAL ===
 SET PROJECT_PATH=D:\T\Proyectos\ProyectoPGH
 SET PROJECT_NAME=ProyectoPGH
 SET APP_NAME=Mprincipal
@@ -20,39 +20,39 @@ echo Ruta de Python:       %PYTHON_PATH%
 echo.
 
 :: === CONFIRMAR CON EL USUARIO ===
-CHOICE /M "¿Deseas continuar con la creación del proyecto?"
+CHOICE /M "Â¿Deseas continuar con la creaciÃ³n del proyecto?"
 IF ERRORLEVEL 2 (
-    echo Operación cancelada por el usuario.
+    echo OperaciÃ³n cancelada por el usuario.
     pause
     exit /b
 )
 
 :: === VERIFICAR EXISTENCIA DE PYTHON ===
 IF NOT EXIST "%PYTHON_PATH%" (
-    echo [ERROR] No se encontró Python 3.12.3 en: %PYTHON_PATH%
-    echo Por favor instálalo desde: https://www.python.org/downloads/release/python-3123/
+    echo [ERROR] No se encontrÃ³ Python 3.12.3 en: %PYTHON_PATH%
+    echo Por favor instÃ¡lalo desde: https://www.python.org/downloads/release/python-3123/
     pause
     exit /b
 ) ELSE (
-    echo [OK] Python 3.12.3 está instalado.
+    echo [OK] Python 3.12.3 estÃ¡ instalado.
 )
 
 :: === VERIFICAR EXISTENCIA DE DISCO Y CARPETA ===
 IF NOT EXIST "D:\Proyectos" (
-    echo [INFO] La carpeta D:\Proyectos no existe. Se creará.
+    echo [INFO] La carpeta D:\Proyectos no existe. Se crearÃ¡.
     mkdir D:\Proyectos
 )
 
 IF EXIST "%PROJECT_PATH%" (
     echo [ADVERTENCIA] Ya existe la carpeta del proyecto: %PROJECT_PATH%
-    CHOICE /M "¿Deseas continuar (esto puede sobrescribir archivos existentes)?"
+    CHOICE /M "Â¿Deseas continuar (esto puede sobrescribir archivos existentes)?"
     IF ERRORLEVEL 2 (
-        echo Operación cancelada.
+        echo OperaciÃ³n cancelada.
         pause
         exit /b
     )
 ) ELSE (
-    echo [OK] Se creará la carpeta del proyecto en: %PROJECT_PATH%
+    echo [OK] Se crearÃ¡ la carpeta del proyecto en: %PROJECT_PATH%
 )
 
 :: === CREAR CARPETA DEL PROYECTO ===
@@ -67,19 +67,26 @@ echo Creando entorno virtual: %VENV_NAME%...
 CALL %VENV_NAME%\Scripts\activate.bat
 
 :: === ACTUALIZAR pip y setuptools ===
-echo Actualizando pip y setuptools...
-python -m pip install --upgrade pip setuptools
+echo Actualizando pip...
+python -m pip install --upgrade pip
 
 :: === INSTALAR DEPENDENCIAS BASE ===
-echo Instalando Django y Django REST Framework...
-pip install Django==5.0.4 djangorestframework==3.15.1
+echo Instalando dependencias requeridas...
+pip install ^
+    asgiref==3.8.1 ^
+    Django==5.0.4 ^
+    djangorestframework==3.15.1 ^
+    setuptools==80.4.0 ^
+    sqlparse==0.5.3 ^
+    tzdata==2025.2 ^
+    pillow==11.2.1
 
 :: === CREAR PROYECTO DJANGO ===
 IF NOT EXIST "manage.py" (
     echo Creando proyecto Django: %PROJECT_NAME%...
     django-admin startproject %PROJECT_NAME% .
 ) ELSE (
-    echo Ya existe un archivo manage.py, se omite la creación del proyecto Django.
+    echo Ya existe un archivo manage.py, se omite la creaciÃ³n del proyecto Django.
 )
 
 :: === CREAR APP PRINCIPAL ===
@@ -87,7 +94,7 @@ IF NOT EXIST "%APP_NAME%\apps.py" (
     echo Creando app Django llamada %APP_NAME%...
     python manage.py startapp %APP_NAME%
 ) ELSE (
-    echo Ya existe la app %APP_NAME%, se omite la creación.
+    echo Ya existe la app %APP_NAME%, se omite la creaciÃ³n.
 )
 
 :: === GUARDAR DEPENDENCIAS ===
