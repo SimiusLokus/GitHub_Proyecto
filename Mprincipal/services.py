@@ -21,7 +21,7 @@ def obtener_usuarios():
 def obtener_pedidos():
     try:
         res = requests.get(f"{BASE_URL}/pedidos/pedidos",f"{BASE_URL}/pedidos/detalles")
-       # res = requests.get(f"{BASE_URL}/pedidos/detalles")
+       #res = requests.get(f"{BASE_URL}/pedidos/detalles")
         res.raise_for_status()
         return res.json()
     except Exception as e:
