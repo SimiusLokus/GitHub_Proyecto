@@ -1,12 +1,11 @@
-from django.shortcuts import render
-
 from rest_framework import viewsets
 from .models import (
     Categoria, Talla, Marca, Color, Material, Estado, Publicacion
 )
 from .serializers import (
     CategoriaSerializer, TallaSerializer, MarcaSerializer,
-    ColorSerializer, MaterialSerializer, EstadoSerializer, PublicacionSerializer
+    ColorSerializer, MaterialSerializer, EstadoSerializer,
+    PublicacionSerializer
 )
 
 class CategoriaViewSet(viewsets.ModelViewSet):
@@ -36,4 +35,3 @@ class EstadoViewSet(viewsets.ModelViewSet):
 class PublicacionViewSet(viewsets.ModelViewSet):
     queryset = Publicacion.objects.all()
     serializer_class = PublicacionSerializer
-
